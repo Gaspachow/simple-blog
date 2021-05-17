@@ -22,16 +22,28 @@ export default function Home() {
           <code className={styles.code}>pages/index.js</code>
         </p>
 
-        <div className={styles.card}>
-          <Image
-            src="/tomato.png"
-            alt="Tomato"
-            width={300}
-            height={300}
-          />
-          <br/>
-          <h3>Local Image</h3>
+        <div className={styles.grid}>
+          <div className={styles.card}>
+            <Image
+              src="/tomato.png"
+              alt="Tomato"
+              width={300}
+              height={300}
+            />
+            <h3>Local Image</h3>
+          </div>
+
+          <div className={styles.card}>
+            <Image
+              src="https://res.cloudinary.com/gaspacho/image/upload/v1621264935/sample.jpg"
+              alt="Tomato"
+              width={300}
+              height={300}
+            />
+            <h3>Cloudinary Image</h3>
+          </div>
         </div>
+
       </main>
 
       <footer className={styles.footer}>
