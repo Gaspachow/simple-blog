@@ -22,7 +22,7 @@ export default function Home() {
           <code className={styles.code}>pages/index.js</code>
         </p>
 
-        <div className={styles.grid}>
+        <div className={styles.card}>
           <Image
             src="/tomato.png"
             alt="Tomato"
