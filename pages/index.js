@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { useState }  from 'react'
 
 export async function getStaticProps() {
 
@@ -13,6 +14,9 @@ export async function getStaticProps() {
 }
 
 export default function Home(props) {
+
+  const [imgUrl, setImgUrl] = useState("https://res.cloudinary.com/gaspacho/image/upload/v1621264935/sample.jpg")
+
   return (
     <div className={styles.container}>
       <Head>
@@ -44,6 +48,7 @@ export default function Home(props) {
                   uploadPreset: props.preset}, (error, result) => { 
                     if (!error && result && result.event === "success") { 
                       console.log('Done! Here is the image info: ', result.info); 
+                      setImgUrl(result.info.secure_url);
                     }
                   }
                 )
@@ -55,8 +60,8 @@ export default function Home(props) {
 
           <div className={styles.card}>
             <Image
-              src="https://res.cloudinary.com/gaspacho/image/upload/v1621264935/sample.jpg"
-              alt="Tomato"
+              src={imgUrl}
+              alt="Cloudinary Image"
               width={300}
               height={300}
             />
