@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import newPost from '../utils/newPost'
 import { useState }  from 'react'
 
 export async function getStaticProps() {
@@ -49,6 +50,7 @@ export default function Home(props) {
                     if (!error && result && result.event === "success") { 
                       console.log('Done! Here is the image info: ', result.info); 
                       setImgUrl(result.info.secure_url);
+                      newPost(result.info.secure_url);
                     }
                   }
                 )
