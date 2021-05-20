@@ -5,7 +5,7 @@ const handler = async (req, res) => {
   if (req.method === 'POST') {
     // Check if title, desc or imgUrl is provided
     const { title, desc, imgUrl } = req.body;
-    if (title && desc && imgUrl) {
+    if (title && imgUrl) {
         try {
           var newPost = new Post({
             title,

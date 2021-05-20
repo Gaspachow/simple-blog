@@ -1,10 +1,9 @@
 
-async function newPost(imgUrl) {
-
+async function newPost(postValues, imgUrl) {
     const res = await fetch('/api/newPost', {
       body: JSON.stringify({
-        title: 'Test x',
-        desc: 'Test description!',
+        title: postValues.title,
+        desc: postValues.desc,
         imgUrl: imgUrl,
       }),
       headers: {

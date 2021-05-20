@@ -5,7 +5,6 @@ import newPost from '../utils/newPost'
 import { useState }  from 'react'
 
 export async function getStaticProps() {
-
   return {
     props: {
       cloudName: process.env.CLOUD_NAME,
@@ -16,7 +15,22 @@ export async function getStaticProps() {
 
 export default function Home(props) {
 
-  const [imgUrl, setImgUrl] = useState("https://res.cloudinary.com/gaspacho/image/upload/v1621264935/sample.jpg")
+  const [imgUrl, setImgUrl] = useState();
+  const [postValues, setPostValues] = useState({title: "", desc: ""});
+
+  function handleChange(e) {
+    const {name, value} = e.target;
+    setPostValues({...postValues, [name]: value});
+    console.log(name, value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    newPost(postValues, imgUrl);
+    console.log("Created post with values: ", postValues.title, postValues.desc, imgUrl);
+    setPostValues({title: "", desc: ""});
+    setImgUrl(0);
+  }
 
   return (
     <div className={styles.container}>
@@ -28,13 +42,8 @@ export default function Home(props) {
       <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="/">Our simple blog test!</a>
         </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
 
         <div className={styles.grid}>
           <div className={styles.card}>
@@ -43,32 +52,49 @@ export default function Home(props) {
               alt="Tomato"
               width={300}
               height={300}
-              onClick={() => {
-                var myWidget = cloudinary.createUploadWidget({
-                  cloudName: props.cloudName, 
-                  uploadPreset: props.preset}, (error, result) => { 
-                    if (!error && result && result.event === "success") { 
-                      console.log('Done! Here is the image info: ', result.info); 
-                      setImgUrl(result.info.secure_url);
-                      newPost(result.info.secure_url);
-                    }
-                  }
-                )
-                console.log(props.cloudName);
-                myWidget.open();}}
             />
             <h3>Local Image</h3>
           </div>
 
           <div className={styles.card}>
             <Image
-              src={imgUrl}
-              alt="Cloudinary Image"
+              src={imgUrl ? imgUrl : "/none.png"}
+              alt="Uploaded Image"
               width={300}
               height={300}
             />
-            <h3>Cloudinary Image</h3>
+            <h3>Uploaded Image</h3>
           </div>
+
+          <form onSubmit={handleSubmit}>
+            <label>Title  </label>
+            <input name="title" value={postValues.title} onChange={handleChange} required />
+            <br/>
+            <label>Description  </label>
+            <input name="desc" value={postValues.desc} onChange={handleChange} />
+            <br/>
+            <label>Image  </label>
+            <button
+              type="button"
+              onClick={() => {
+                var myWidget = cloudinary.createUploadWidget(
+                  {
+                  cloudName: props.cloudName, 
+                  uploadPreset: props.preset
+                  }, (error, result) => { 
+                    if (!error && result && result.event === "success") { 
+                      console.log('Done! Here is the image info: ', result.info); 
+                      setImgUrl(result.info.secure_url);
+                    }
+                  }
+                )
+                myWidget.open();}}
+            >
+              Upload Image
+            </button>
+            <br/>
+            <button type="submit">Create Post</button>
+          </form>
 
         </div>
 
