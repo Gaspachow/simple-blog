@@ -2,6 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import newPost from '../utils/newPost'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 import { useState }  from 'react'
 
 export async function getStaticProps() {
@@ -42,76 +44,66 @@ export default function Home(props) {
       <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="/">Our simple blog test!</a>
+          Welcome to <a href="/">a simple post test!</a>
         </h1>
 
         <div className={styles.grid}>
-          <div className={styles.card}>
-            <Image
-              src="/tomato.png"
-              alt="Tomato"
-              width={300}
-              height={300}
-            />
-            <h3>Local Image</h3>
-          </div>
-
-          <div className={styles.card}>
+          <div 
+            className={styles.card}
+          >
             <Image
               src={imgUrl ? imgUrl : "/none.png"}
               alt="Uploaded Image"
-              width={300}
-              height={300}
+              width="auto"
+              height="auto"
             />
-            <h3>Uploaded Image</h3>
           </div>
 
-          <form onSubmit={handleSubmit}>
-            <label>Title  </label>
-            <input name="title" value={postValues.title} onChange={handleChange} required />
-            <br/>
-            <label>Description  </label>
-            <input name="desc" value={postValues.desc} onChange={handleChange} />
-            <br/>
-            <label>Image  </label>
-            <button
-              type="button"
-              onClick={() => {
-                var myWidget = cloudinary.createUploadWidget(
-                  {
-                  cloudName: props.cloudName, 
-                  uploadPreset: props.preset
-                  }, (error, result) => { 
-                    if (!error && result && result.event === "success") { 
-                      console.log('Done! Here is the image info: ', result.info); 
-                      setImgUrl(result.info.secure_url);
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>Title</Form.Label>
+              <Form.Control name="title" type="text" placeholder="Title" value={postValues.title}  onChange={handleChange} required />
+            </Form.Group>
+
+            <Form.Group controlId="desc">
+              <Form.Label>Description</Form.Label>
+              <Form.Control name="desc" as="textarea" placeholder="(Optional)" value={postValues.desc}  onChange={handleChange} />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Image</Form.Label>
+              <br/>
+              <Button
+                disabled={imgUrl ? true : false}
+                type="button"
+                size="sm"
+                variant={imgUrl ? "success" : "primary"}
+                onClick={() => {
+                  var myWidget = cloudinary.createUploadWidget(
+                    {
+                    cloudName: props.cloudName, 
+                    uploadPreset: props.preset
+                    }, (error, result) => { 
+                      if (!error && result && result.event === "success") { 
+                        console.log('Done! Here is the image info: ', result.info); 
+                        setImgUrl(result.info.secure_url);
+                        myWidget.close();
+                      }
                     }
-                  }
-                )
-                myWidget.open();}}
-            >
-              Upload Image
-            </button>
+                  )
+                  myWidget.open();}}
+              >
+                {imgUrl ? "Uploaded" : "Upload Image"}
+              </Button>
+            </Form.Group>
             <br/>
-            <button type="submit">Create Post</button>
-          </form>
+            <br/>
+            <Button type="submit" size="lg">Create Post</Button>
+          </Form>
 
         </div>
 
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   )
 }
