@@ -8,9 +8,9 @@ Create a dynamic NextJS image/blog website
 - React-Bootstrap
 
 ## Current WIP
-Form to a post an image to the database working.  
-Need to implement frontpage dynamically pulling every post from MongoDB and displaying them.
-Internal GET request API to fetch all existing posts
+- Form to a post an image to the database working.  
+- Need to implement frontpage dynamically pulling every post from MongoDB and displaying them.  
+- Internal GET request API to fetch all existing posts.  
 
 ##     
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
