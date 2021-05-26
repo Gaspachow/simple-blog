@@ -1,5 +1,5 @@
 
-async function newPost(postValues, imgUrl) {
+async function createPost(postValues, imgUrl) {
     const res = await fetch('/api/newPost', {
       body: JSON.stringify({
         title: postValues.title,
@@ -16,4 +16,4 @@ async function newPost(postValues, imgUrl) {
     console.log(result);
 }
 
-export default newPost;
+export default createPost;
