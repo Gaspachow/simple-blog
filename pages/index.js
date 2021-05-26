@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import newPost from '../utils/newPost'
+import createPost from '../utils/createPost'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useState }  from 'react'
@@ -28,7 +28,7 @@ export default function Home(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    newPost(postValues, imgUrl);
+    createPost(postValues, imgUrl);
     console.log("Created post with values: ", postValues.title, postValues.desc, imgUrl);
     setPostValues({title: "", desc: ""});
     setImgUrl(0);
@@ -71,7 +71,6 @@ export default function Home(props) {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Image</Form.Label>
               <br/>
               <Button
                 disabled={imgUrl ? true : false}
@@ -98,7 +97,7 @@ export default function Home(props) {
             </Form.Group>
             <br/>
             <br/>
-            <Button type="submit" size="lg">Create Post</Button>
+            <Button type="submit" size="lg" disabled={imgUrl ? false : true} >Create Post</Button>
           </Form>
 
         </div>
