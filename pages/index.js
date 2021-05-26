@@ -44,7 +44,7 @@ export default function Home(props) {
       <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="/">a simple post test!</a>
+          Create a post below or <a href="/posts">check posts</a>
         </h1>
 
         <div className={styles.grid}>
