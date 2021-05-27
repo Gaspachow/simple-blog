@@ -1,11 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import createPost from '../utils/createPost'
+import delPost from '../utils/delPost'
 import getAllPosts from '../utils/getAllPosts'
 import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import { useState }  from 'react'
 
 export async function getServerSideProps() {
 
@@ -36,8 +34,8 @@ export default function Home(props) {
         </h1>
 
         <div className={styles.grid}>
-          {posts.map(({title, desc, imgUrl}) => (
-              <div className={styles.card}>
+          {posts.map(({title, _id, imgUrl}) => (
+              <div className={styles.card} key={_id}>
               <Image
                 src={imgUrl}
                 alt="Uploaded Image"
@@ -45,6 +43,13 @@ export default function Home(props) {
                 height="auto"
               />
               <h3>{title}</h3>
+              <Button
+                variant="danger"
+                size='sm'
+                onClick={() => delPost(_id)}
+              >
+                delete
+              </Button>
             </div>
           ))}
         </div>
