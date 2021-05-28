@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import delPost from '../utils/delPost'
 import getAllPosts from '../utils/getAllPosts'
@@ -28,29 +29,34 @@ export default function Home(props) {
       </Head>
       <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
       <main className={styles.main}>
-        <p><a href="/">&larr; Back</a></p>
+        <p><Link href="/"><a>&larr; Back</a></Link></p>
         <h1 className={styles.title}>
           Posts list
         </h1>
 
         <div className={styles.grid}>
           {posts.map(({title, _id, imgUrl}) => (
+            
               <div className={styles.card} key={_id}>
-              <Image
-                src={imgUrl}
-                alt="Uploaded Image"
-                width="auto"
-                height="auto"
-              />
-              <h3>{title}</h3>
-              <Button
-                variant="danger"
-                size='sm'
-                onClick={() => delPost(_id)}
-              >
-                delete
-              </Button>
-            </div>
+                <Link href={'posts/' + _id}>
+                  <a>
+                    <Image
+                      src={imgUrl}
+                      alt="Uploaded Image"
+                      width="auto"
+                      height="auto"
+                    />
+                  </a>
+                </Link>
+                <h3>{title}</h3>
+                <Button
+                  variant="danger"
+                  size='sm'
+                  onClick={() => delPost(_id)}
+                >
+                  delete
+                </Button>
+              </div>
           ))}
         </div>
 
