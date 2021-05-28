@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import createPost from '../utils/createPost'
 import Button from 'react-bootstrap/Button'
@@ -44,7 +45,7 @@ export default function Home(props) {
       <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Create a post below or <a href="/posts">check posts</a>
+          Create a post below or <Link href="/posts"><a>check posts</a></Link>
         </h1>
 
         <div className={styles.grid}>
