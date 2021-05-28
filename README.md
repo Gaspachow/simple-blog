@@ -1,5 +1,5 @@
 ## Project Goal
-Create a dynamic NextJS image/blog website.
+Create a dynamic NextJS image/blog website.  
 Warning: This site is ugly for now, as the current priority is to test and link all back-end using NextJS
 
 ## Stack
