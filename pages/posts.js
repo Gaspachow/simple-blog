@@ -1,10 +1,8 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import delPost from '../utils/delPost'
 import getAllPosts from '../utils/getAllPosts'
-import Button from 'react-bootstrap/Button'
+import Post from '../components/Post'
 
 export async function getServerSideProps() {
 
@@ -36,27 +34,12 @@ export default function Home(props) {
 
         <div className={styles.grid}>
           {posts.map(({title, _id, imgUrl}) => (
-            
-              <div className={styles.card} key={_id}>
-                <Link href={'posts/' + _id}>
-                  <a>
-                    <Image
-                      src={imgUrl}
-                      alt="Uploaded Image"
-                      width="auto"
-                      height="auto"
-                    />
-                  </a>
-                </Link>
-                <h3>{title}</h3>
-                <Button
-                  variant="danger"
-                  size='sm'
-                  onClick={() => delPost(_id)}
-                >
-                  delete
-                </Button>
-              </div>
+            <Post
+              title={title}
+              _id={_id}
+              imgUrl={imgUrl}
+              key={_id}
+            />
           ))}
         </div>
 
