@@ -29,7 +29,7 @@ export default function Home(props) {
       </Head>
       <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
       <main className={styles.main}>
-      <p><Link href="/posts"><a>&larr; Back</a></Link></p>
+      <p><Link href="/"><a>&larr; Back</a></Link></p>
         <h1 className={styles.title}>
           {post.title}
         </h1>
