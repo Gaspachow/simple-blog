@@ -1,12 +1,13 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import createPost from '../utils/createPost'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useState }  from 'react'
 import Layout from '../components/Layout'
+import CloudinaryButton from '../components/CloudinaryButton'
+import Router from 'next/router'
 
 export async function getStaticProps() {
   return {
@@ -34,6 +35,7 @@ export default function Home(props) {
     console.log("Created post with values: ", postValues.title, postValues.desc, imgUrl);
     setPostValues({title: "", desc: ""});
     setImgUrl(0);
+    Router.push('/');
   }
 
   return (
@@ -51,9 +53,7 @@ export default function Home(props) {
           </h1>
 
           <div className={styles.grid}>
-            <div 
-              className={styles.card}
-            >
+            <div className={styles.card}>
               <Image
                 src={imgUrl ? imgUrl : "/none.png"}
                 alt="Uploaded Image"
@@ -75,28 +75,12 @@ export default function Home(props) {
 
               <Form.Group>
                 <br/>
-                <Button
-                  disabled={imgUrl ? true : false}
-                  type="button"
-                  size="sm"
-                  variant={imgUrl ? "success" : "primary"}
-                  onClick={() => {
-                    var myWidget = cloudinary.createUploadWidget(
-                      {
-                      cloudName: props.cloudName, 
-                      uploadPreset: props.preset
-                      }, (error, result) => { 
-                        if (!error && result && result.event === "success") { 
-                          console.log('Done! Here is the image info: ', result.info); 
-                          setImgUrl(result.info.secure_url);
-                          myWidget.close();
-                        }
-                      }
-                    )
-                    myWidget.open();}}
-                >
-                  {imgUrl ? "Uploaded" : "Upload Image"}
-                </Button>
+                <CloudinaryButton
+                  imgUrl={imgUrl}
+                  setImgUrl={setImgUrl}
+                  cloudName={props.cloudName}
+                  preset={props.preset}
+                />
               </Form.Group>
               <br/>
               <br/>
