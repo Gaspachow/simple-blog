@@ -8,10 +8,10 @@ Warning: This site is ugly for now, as the current priority is to test and link 
 - Cloudinary widget to host the images and use its various transformation tools
 - React-Bootstrap
 
-## Current WIP
-- Form to a post an image to the database working.  
-- Need to implement frontpage dynamically pulling every post from MongoDB and displaying them.  
-- Internal GET request API to fetch all existing posts.  
+## Current WIP 
+- Need to implement frontpage dynamically pulling every post from MongoDB and displaying them.
+- Good looking, responsive front-page
+- TBD: Layout component  
 
 ##     
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
