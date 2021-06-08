@@ -6,16 +6,16 @@ function Header() {
 
     return(
   <Container>
-  <Navbar variant="light" expand="lg" >
-    <Navbar.Brand href="/">Simple Blog</Navbar.Brand>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-    <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="ml-auto">
-        <Nav.Link href="/">All Posts</Nav.Link>
-        <Nav.Link href="/createPost">Create Post</Nav.Link>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
+    <Navbar variant="light" expand="lg" >
+      <Navbar.Brand href="/">Simple Blog</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Link href="/">All Posts</Nav.Link>
+          <Nav.Link href="/createPost">Create Post</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   </Container>
     )
 }
