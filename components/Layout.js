@@ -1,10 +1,13 @@
 import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
+import Container from "react-bootstrap/Container"
 
 function Header() {
 
     return(
-  <Navbar variant="light" expand="lg" style={{backgroundColor: 'grey'}}>
+  <Container>
+  <Navbar variant="light" expand="lg" >
+    <Navbar.Brand href="/">Simple Blog</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
@@ -13,6 +16,7 @@ function Header() {
       </Nav>
     </Navbar.Collapse>
   </Navbar>
+  </Container>
     )
 }
 
